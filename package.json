@@ -1,0 +1,60 @@
+{
+  "name": "qscrape",
+  "version": "0.0.0",
+  "author": {
+    "name": "Asher Jingkong Chen"
+  },
+  "description": "Scrape the web pages more easier",
+  "devDependencies": {
+    "@types/inquirer": "^9.0.7",
+    "@types/jsdom": "^21.1.6",
+    "@types/node": "^20",
+    "@vitest/coverage-istanbul": "^1.2.2",
+    "inquirer": "^9.2.15",
+    "jsdom": "^24.0.0",
+    "npm-run-all2": "^6.1.2",
+    "prettier": "^3.2.5",
+    "typescript": "^5.3.3",
+    "vite": "^5.1.3",
+    "vite-plugin-dts": "^3.7.2",
+    "vitest": "^1.2.2"
+  },
+  "exports": {
+    ".": {
+      "default": "./dist/qscrape.js",
+      "import": "./dist/qscrape.js",
+      "require": "./dist/qscrape.umd.cjs",
+      "types": "./dist/qscrape.d.ts"
+    }
+  },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "dist",
+    "package.json"
+  ],
+  "homepage": "https://asherjingkongchen.github.io/qscrape/",
+  "keywords": [
+    "scrape",
+    "spider",
+    "web"
+  ],
+  "license": "MIT",
+  "main": "./dist/qscrape.umd.cjs",
+  "module": "./dist/qscrape.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AsherJingkongChen/qscrape.git"
+  },
+  "scripts": {
+    "build": "run-p _build check format",
+    "_build": "vite build",
+    "check": "tsc",
+    "dev-build": "vite build --mode development",
+    "dev-test": "vitest",
+    "format": "prettier --write .",
+    "test": "vitest --run"
+  },
+  "type": "module",
+  "types": "./dist/qscrape.d.ts"
+}
