@@ -4,14 +4,17 @@
   "author": {
     "name": "Asher Jingkong Chen"
   },
+  "bin": "./dist/bin.cjs",
   "description": "Easily scrape web pages",
+  "dependencies": {
+    "inquirer": "^9.2.15",
+    "jsdom": "^24.0.0"
+  },
   "devDependencies": {
     "@types/inquirer": "^9.0.7",
     "@types/jsdom": "^21.1.6",
     "@types/node": "^20",
     "@vitest/coverage-istanbul": "^1.2.2",
-    "inquirer": "^9.2.15",
-    "jsdom": "^24.0.0",
     "npm-run-all2": "^6.1.2",
     "prettier": "^3.2.5",
     "typescript": "^5.3.3",
@@ -21,10 +24,22 @@
   },
   "exports": {
     ".": {
-      "default": "./dist/qscrape.js",
-      "import": "./dist/qscrape.js",
-      "require": "./dist/qscrape.umd.cjs",
-      "types": "./dist/qscrape.d.ts"
+      "default": "./dist/lib.js",
+      "import": "./dist/lib.js",
+      "require": "./dist/lib.cjs",
+      "types": "./dist/lib.d.ts"
+    },
+    "./bin": {
+      "default": "./dist/bin.js",
+      "import": "./dist/bin.js",
+      "require": "./dist/bin.cjs",
+      "types": "./dist/bin.d.ts"
+    },
+    "./lib": {
+      "default": "./dist/lib.js",
+      "import": "./dist/lib.js",
+      "require": "./dist/lib.cjs",
+      "types": "./dist/lib.d.ts"
     }
   },
   "files": [
@@ -40,8 +55,8 @@
     "web"
   ],
   "license": "MIT",
-  "main": "./dist/qscrape.umd.cjs",
-  "module": "./dist/qscrape.js",
+  "main": "./dist/lib.cjs",
+  "module": "./dist/lib.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/AsherJingkongChen/qscrape.git"
@@ -56,5 +71,5 @@
     "test": "vitest --run"
   },
   "type": "module",
-  "types": "./dist/qscrape.d.ts"
+  "types": "./dist/lib.d.ts"
 }
