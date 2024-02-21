@@ -37,11 +37,11 @@ export class Queue<TElement> {
 
   /**
    * ## Introduction
-   * Extract the earliest value from the queue
+   * Extract the earliest element from the queue
    *
    * ## Returns
    * - `TElement | undefined`
-   *   + The earliest value
+   *   + The earliest element
    *   + `undefined` if the queue is empty
    */
   poll(): TElement | undefined {
@@ -50,13 +50,30 @@ export class Queue<TElement> {
 
   /**
    * ## Introduction
-   * Push a new value into the queue
+   * Push new elements into the queue
    *
    * ## Parameters
-   * - `value`: `TElement`
-   *   + The value to push
+   * - `...element`: `TElement[]`
+   *   + The elements to push
    */
-  push(value: TElement): void {
-    this.#buffer.push(value);
+  push(...element: TElement[]): void {
+    this.#buffer.push(...element);
+  }
+
+  /**
+   * ## Introduction
+   * Iterate through the queue
+   *
+   * ## Yields
+   * - `TElement`
+   *   + A element polled from the queue
+   *
+   * ## Note
+   * - The yielded element is always in the order it were pushed
+   * - Any other operations on the queue during iteration (e.g. `Queue.prototype.poll()`)
+   *   may affect the yielded element but never invalidate the iterator
+   */
+  *[Symbol.iterator](): Generator<TElement> {
+    for (let element; (element = this.poll()) !== undefined; yield element);
   }
 }
