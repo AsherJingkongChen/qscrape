@@ -6,7 +6,7 @@
 
 ## What is it for?
 
-With `qscrape`, you can scrape the web pages more easier.
+With `qscrape`, you can easliy scrape web pages.
 
 We've provided a simple CLI for you. You can obtain `qscrape` from NPM. Please see the section [`How to Obtain`](#how-to-obtain).
 

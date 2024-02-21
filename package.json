@@ -4,7 +4,7 @@
   "author": {
     "name": "Asher Jingkong Chen"
   },
-  "description": "Scrape the web pages more easier",
+  "description": "Easily scrape web pages",
   "devDependencies": {
     "@types/inquirer": "^9.0.7",
     "@types/jsdom": "^21.1.6",
