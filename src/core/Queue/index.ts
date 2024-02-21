@@ -1,15 +1,19 @@
 /**
  * ## Introduction
- * A generic queue data structure, 
- * which follows the First-In-First-Out (FIFO) principle, 
+ * A generic queue data structure,
+ * which follows the First-In-First-Out (FIFO) principle,
  * where the first element added is the first one to be polled.
- * 
+ *
  * ## Layout
  * - `Queue<TElement>`
  *   + `TElement` is the type of elements in the queue
  */
 export class Queue<TElement> {
-  private readonly _buffer: TElement[];
+  /**
+   * ## Introduction
+   * The internal storage that holds the elements
+   */
+  readonly #buffer: TElement[];
 
   /**
    * ## Introduction
@@ -28,7 +32,7 @@ export class Queue<TElement> {
   constructor(iterable: Iterable<TElement>);
 
   constructor(iterable?: Iterable<TElement>) {
-    this._buffer = iterable ? Array.from(iterable) : [];
+    this.#buffer = iterable ? Array.from(iterable) : [];
   }
 
   /**
@@ -41,7 +45,7 @@ export class Queue<TElement> {
    *   + `undefined` if the queue is empty
    */
   poll(): TElement | undefined {
-    return this._buffer.shift();
+    return this.#buffer.shift();
   }
 
   /**
@@ -53,6 +57,6 @@ export class Queue<TElement> {
    *   + The value to push
    */
   push(value: TElement): void {
-    this._buffer.push(value);
+    this.#buffer.push(value);
   }
 }
