@@ -8,7 +8,7 @@ export class Reference {
 
   /**
    * ## Introduction
-   * Create a reference from a resource link and name
+   * Creates a reference from a resource link and name
    *
    * ## Parameters
    * - `link`: `string`
@@ -24,7 +24,7 @@ export class Reference {
 
   /**
    * ## Introduction
-   * Clone a reference
+   * Clones a reference
    *
    * ## Parameters
    * - `source`: `Reference`
@@ -53,7 +53,7 @@ export class Reference {
 
   /**
    * ## Introduction
-   * Converts `Reference` to `string`
+   * Converts a reference to a string
    *
    * ## Note
    * - The string format adapts Markdown syntax: `[name](link)`
@@ -65,7 +65,7 @@ export class Reference {
 
   /**
    * ## Introduction
-   * Extract references from an HTML element
+   * Extracts references from an HTML element
    *
    * ## Parameters
    * - `html`: `HTMLElement`
@@ -85,7 +85,7 @@ export class Reference {
 
   /**
    * ## Introduction
-   * Extract references from text data
+   * Extracts references from text data
    *
    * ## Parameters
    * - `text`: `string`

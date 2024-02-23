@@ -6,24 +6,24 @@
  *
  * ## Layout
  * - `Queue<TElement>`
- *   + `TElement` is the type of elements in the queue
+ *   + `TElement` is the element type of the queue
  */
 export class Queue<TElement> {
   /**
    * ## Introduction
-   * The internal storage that holds the elements
+   * The internal storage of elements
    */
   readonly #buffer: TElement[];
 
   /**
    * ## Introduction
-   * Create an empty queue
+   * Creates an empty queue
    */
   constructor();
 
   /**
    * ## Introduction
-   * Create a queue from an iterable
+   * Creates a queue from an iterable
    *
    * ## Parameters
    * - `iterable`: `Iterable<TElement>`
@@ -37,7 +37,7 @@ export class Queue<TElement> {
 
   /**
    * ## Introduction
-   * Extract the earliest element from the queue
+   * Extracts the earliest element from the queue
    *
    * ## Returns
    * - `TElement | undefined`
@@ -50,7 +50,7 @@ export class Queue<TElement> {
 
   /**
    * ## Introduction
-   * Push new elements into the queue
+   * Pushes new elements into the queue
    *
    * ## Parameters
    * - `...element`: `TElement[]`
@@ -62,7 +62,7 @@ export class Queue<TElement> {
 
   /**
    * ## Introduction
-   * Iterate through the queue
+   * Iterates the queue
    *
    * ## Yields
    * - `TElement`
