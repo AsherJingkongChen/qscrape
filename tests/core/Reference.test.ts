@@ -27,7 +27,7 @@ describe('new Reference()', () => {
 });
 
 describe('Reference.prototype.toString()', () => {
-  it('It contains its link and name', () => {
+  it('Its result contains the reference link and name', () => {
     const link = 'https://example.com/';
     const name = 'Example';
     const ref = new Reference(link, name);
