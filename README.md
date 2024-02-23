@@ -6,9 +6,9 @@
 
 ## What is it for?
 
-With `qscrape`, you can easliy scrape web pages.
+With `qscrape`, you can explore the Web easily. This scraper will continuously bring you web pages. Reading text on the console is all you need to do.
 
-We've provided a simple CLI for you. You can obtain `qscrape` from NPM. Please see the section [`How to Obtain`](#how-to-obtain).
+We've provided a **command line tool** and a **library** for you, which are simple to use. You can obtain `qscrape` from NPM. Please see the section [`How to Obtain`](#how-to-obtain).
 
 ## Try Our Demo
 
@@ -46,6 +46,10 @@ We've provided a simple CLI for you. You can obtain `qscrape` from NPM. Please s
   - [Vite](https://vitejs.dev/)
 - Environments
   - [Node.js v20](https://nodejs.org/)
+- Frameworks
+  - [Inquirer.js](https://github.com/SBoudrias/Inquirer.js)
+- Libraries
+  - [JSDOM](https://github.com/jsdom/jsdom)
 - Linters
   - [Prettier](https://prettier.io/)
   - [TypeScript](https://www.typescriptlang.org/)

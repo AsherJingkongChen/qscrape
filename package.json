@@ -4,14 +4,13 @@
   "author": {
     "name": "Asher Jingkong Chen"
   },
-  "bin": "./dist/bin.cjs",
-  "description": "Easily scrape web pages",
+  "bin": "./dist/bin.js",
+  "description": "Explore the Web",
   "dependencies": {
-    "inquirer": "^9.2.15",
+    "@inquirer/prompts": "^4.1.0",
     "jsdom": "^24.0.0"
   },
   "devDependencies": {
-    "@types/inquirer": "^9.0.7",
     "@types/jsdom": "^21.1.6",
     "@types/node": "^20",
     "@vitest/coverage-istanbul": "^1.2.2",
@@ -52,7 +51,8 @@
   "keywords": [
     "scrape",
     "spider",
-    "web"
+    "web",
+    "cli"
   ],
   "license": "MIT",
   "main": "./dist/lib.cjs",
@@ -65,10 +65,12 @@
     "build": "run-p _build check format",
     "_build": "vite build",
     "check": "tsc",
+    "dev": "run-s dev-build run-bin",
     "dev-build": "vite build --mode development",
-    "dev-test": "vitest",
     "format": "prettier --write .",
-    "test": "vitest --run"
+    "run-bin": "dist/bin.js",
+    "test": "vitest --run",
+    "start": "run-s build run-bin"
   },
   "type": "module",
   "types": "./dist/lib.d.ts"
