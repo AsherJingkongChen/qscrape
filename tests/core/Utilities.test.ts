@@ -1,4 +1,4 @@
-import { explicitBind } from 'src/feat';
+import { explicitBind } from 'src/core';
 import { describe, expect, it } from 'vitest';
 
 describe('explicitBind()', () => {
