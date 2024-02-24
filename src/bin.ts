@@ -6,7 +6,7 @@ import { QScrape } from './lib';
  * Runs the QScrape and waits for it being done
  *
  * ## Layout
- * - `Promise<void>`
+ * - `Promise<true>`
  *   + Resolves when the QScrape has finished running
  *
  * ## Note

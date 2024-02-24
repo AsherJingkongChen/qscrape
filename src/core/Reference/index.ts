@@ -15,7 +15,7 @@ export class Reference {
    *   + A URL
    * - `name`: `string | null | undefined`
    *   + A resource name
-   *   + It defaults to the hostname of `link`
+   *   + It defaults to the host of `link`
    *
    * ## Note
    * - The constructor uses `URL.constructor` to parse the link
@@ -37,7 +37,7 @@ export class Reference {
       const url = new URL(args[0]);
       this.link = url.href;
       if (!args[1]) {
-        this.name = url.hostname;
+        this.name = url.host;
       } else if (typeof args[1] === 'string') {
         this.name = args[1];
       } else {

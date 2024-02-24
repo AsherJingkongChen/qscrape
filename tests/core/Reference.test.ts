@@ -10,10 +10,10 @@ describe('new Reference()', () => {
     expect(clone).toEqual(ref);
   });
 
-  it('Its default name is the hostname of link', () => {
+  it('Its default name is the host of link', () => {
     const link = 'https://example.com/';
-    const ref = new Reference(link);
-    expect(ref.name).toBe('example.com');
+    expect(new Reference(link).name).toBe('example.com');
+    expect(new Reference(link, '').name).toBe('example.com');
   });
 
   it('It throws if parameters are invalid', async () => {
