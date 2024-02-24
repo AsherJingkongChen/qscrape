@@ -3,8 +3,8 @@
  * A reference holds a resource link and name
  */
 export class Reference {
-  link: string;
-  name: string;
+  readonly link: string;
+  readonly name: string;
 
   /**
    * ## Introduction
@@ -49,6 +49,7 @@ export class Reference {
     } else {
       throw new TypeError('The arguments are invalid');
     }
+    Object.freeze(this);
   }
 
   /**

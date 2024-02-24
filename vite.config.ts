@@ -22,6 +22,7 @@ export default defineConfig((env) => ({
     BundleFinishBannerPlugin(env),
     ChangeExecutablePermissionPlugin(),
     DtsPlugin(),
+    RemoveMultiLineCommentsPlugin(env),
   ],
   test: {
     coverage: {
@@ -97,4 +98,37 @@ function DtsPlugin(): PluginOption {
     insertTypesEntry: true,
     rollupTypes: true,
   });
+}
+
+function RemoveMultiLineCommentsPlugin(context: {
+  mode: string;
+}): PluginOption {
+  return context.mode === 'production'
+    ? {
+        name: '\x1b[36mremove-multi-line-comments\x1b[0m',
+        apply: 'build',
+        enforce: 'post',
+        generateBundle: {
+          order: 'post',
+          async handler(options, bundles) {
+            this.info({
+              message:
+                '\x1b[32m' + 'Removing multi-line comments ...' + '\x1b[0m',
+            });
+            if (options.format !== 'es') {
+              return;
+            }
+            for (const bundle of Object.values(bundles)) {
+              if (bundle.type !== 'chunk') {
+                continue;
+              }
+              bundle.code = bundle.code.replace(/\s*\/\*\*[^\/]*\*\//g, '');
+            }
+            this.info({
+              message: '\x1b[32m' + 'Done' + '\x1b[0m',
+            });
+          },
+        },
+      }
+    : undefined;
 }
