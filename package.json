@@ -67,12 +67,12 @@
     "build": "run-p _build check format",
     "_build": "vite build",
     "check": "tsc",
-    "dev": "run-s dev-build run-bin",
+    "dev": "run-s dev-build exec",
     "dev-build": "vite build --mode development",
     "format": "prettier --write .",
-    "run-bin": "dist/bin.js",
-    "test": "vitest --run",
-    "start": "run-s build run-bin"
+    "exec": "dist/bin.js",
+    "start": "run-s build exec",
+    "test": "vitest --run"
   },
   "type": "module",
   "types": "./dist/lib.d.ts"

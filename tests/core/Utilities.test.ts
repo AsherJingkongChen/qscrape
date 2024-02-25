@@ -8,6 +8,7 @@ describe('explicitBind()', () => {
 
   it('It returns an array-like object', () => {
     const opt = { index: 4 };
+
     // NOTE: length is controlled by the bound function
     expect(explicitBind(charAt, 'Hello', opt)).toHaveLength(0);
     expect(explicitBind(charAt, 'Hello', opt)[0]).toBe(charAt);

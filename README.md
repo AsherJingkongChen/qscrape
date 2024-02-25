@@ -46,9 +46,8 @@ We've provided a **command line tool** and a **library** for you, which are simp
   - [Vite](https://vitejs.dev/)
 - Environments
   - [Node.js v20](https://nodejs.org/)
-- Frameworks
-  - [Inquirer.js](https://github.com/SBoudrias/Inquirer.js)
 - Libraries
+  - [Inquirer.js](https://github.com/SBoudrias/Inquirer.js)
   - [JSDOM](https://github.com/jsdom/jsdom)
 - Linters
   - [Prettier](https://prettier.io/)
@@ -58,15 +57,18 @@ We've provided a **command line tool** and a **library** for you, which are simp
 
 ### See What Commands We Are Using
 
-| Package Manager        | Command   | Script      | Description                       |
-| ---------------------- | --------- | ----------- | --------------------------------- |
-| `bun` / `npm` / `pnpm` | `install` |             | Install dependencies              |
-| `bun` / `npm` / `pnpm` | `run`     | `build`     | Build the library for production  |
-| `bun` / `npm` / `pnpm` | `run`     | `check`     | Check the codes with TypeScript   |
-| `bun` / `npm` / `pnpm` | `run`     | `dev-build` | Build the library for development |
-| `bun` / `npm` / `pnpm` | `run`     | `dev-test`  | Run tests in watch mode           |
-| `bun` / `npm` / `pnpm` | `run`     | `format`    | Format codes using Prettier       |
-| `bun` / `npm` / `pnpm` | `run`     | `test`      | Run tests                         |
+| Package Manager  | Command   | Script      | Description                                   |
+| ---------------- | --------- | ----------- | --------------------------------------------- |
+| `bun` / `(p)npm` | `install` |             | Install dependencies                          |
+| `bun` / `(p)npm` | `run`     | `build`     | Build the project for production              |
+| `bun` / `(p)npm` | `run`     | `check`     | Check the codes with TypeScript               |
+| `bun` / `(p)npm` | `run`     | `dev`       | Build and execute the project for development |
+| `bun` / `(p)npm` | `run`     | `dev-build` | Build the project for development             |
+| `bun` / `(p)npm` | `run`     | `dev-test`  | Run tests in watch mode                       |
+| `bun` / `(p)npm` | `run`     | `format`    | Format codes using Prettier                   |
+| `bun` / `(p)npm` | `run`     | `exec`      | Execute the built program                     |
+| `bun` / `(p)npm` | `run`     | `start`     | Build and execute the project for production  |
+| `bun` / `(p)npm` | `run`     | `test`      | Run tests                                     |
 
 ### Be Aware of These Details
 
