@@ -8,6 +8,22 @@ import { explicitBind } from '../../core';
 export namespace QScrapePrompts {
   /**
    * ## Introduction
+   * The context for the prompts
+   *
+   * ## Layout
+   * - `Object`
+   *   - `input`: `NodeJS.ReadableStream`
+   *     + The input stream
+   *   - `output`: `NodeJS.WritableStream`
+   *     + The output stream
+   */
+  export const context = {
+    input: process.stdin as NodeJS.ReadableStream,
+    output: process.stdout as NodeJS.WritableStream,
+  };
+
+  /**
+   * ## Introduction
    * Gets a prompt to fetch a confirmation from the user
    *
    * ## Parameters
@@ -20,10 +36,14 @@ export namespace QScrapePrompts {
    *   + A prompt function
    */
   export function confirmation(message?: string) {
-    return explicitBind(confirm, {
-      default: true,
-      message: message ?? 'Continue?',
-    });
+    return explicitBind(
+      confirm,
+      {
+        default: true,
+        message: message ?? 'Continue?',
+      },
+      context,
+    );
   }
 
   /**
@@ -43,18 +63,22 @@ export namespace QScrapePrompts {
    * - The input should be a valid URL
    */
   export function referenceLink(placeholder?: string) {
-    return explicitBind(input, {
-      default: placeholder ?? 'https://example.com/',
-      message: 'Enter the reference link:',
-      validate(value) {
-        try {
-          new URL(value);
-          return true;
-        } catch {
-          return 'You must provide a valid URL';
-        }
+    return explicitBind(
+      input,
+      {
+        default: placeholder ?? 'https://example.com/',
+        message: 'Enter the reference link:',
+        validate(value) {
+          try {
+            new URL(value);
+            return true;
+          } catch {
+            return 'You must provide a valid URL';
+          }
+        },
       },
-    });
+      context,
+    );
   }
 
   /**
@@ -71,9 +95,13 @@ export namespace QScrapePrompts {
    *   + A prompt function
    */
   export function referenceName(placeholder?: string) {
-    return explicitBind(input, {
-      default: placeholder ?? 'Example Domain',
-      message: 'Enter the reference name:',
-    });
+    return explicitBind(
+      input,
+      {
+        default: placeholder ?? 'Example Domain',
+        message: 'Enter the reference name:',
+      },
+      context,
+    );
   }
 }

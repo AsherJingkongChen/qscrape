@@ -3,7 +3,7 @@ import { QScrape } from './lib';
 
 /**
  * ## Introduction
- * Runs the QScrape and waits for it being done
+ * Runs the QScrape and waits for it finish
  *
  * ## Layout
  * - `Promise<true>`
@@ -12,4 +12,4 @@ import { QScrape } from './lib';
  * ## Note
  * - This is a result of `QScrape.run()`
  */
-export const hasQScrapeDone = QScrape.run();
+export const hasQScrapeFinished = QScrape.run();
