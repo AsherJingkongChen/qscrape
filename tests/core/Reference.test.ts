@@ -14,13 +14,18 @@ describe('new Reference()', () => {
     const link = 'https://example.com/';
     expect(new Reference(link).name).toBe('example.com');
     expect(new Reference(link, '').name).toBe('example.com');
+    expect(new Reference(link, null).name).toBe('example.com');
   });
 
   it('It throws if parameters are invalid', () => {
     expect(() => new Reference(0 as any)).toThrow(TypeError);
-    expect(() => new Reference('https://example.com/', 1 as any)).toThrow(
+    expect(() => new Reference('https://example.com/', 0 as any)).toThrow(
       TypeError,
     );
+    expect(() => new Reference(0 as any, 'Example Domain')).toThrow(TypeError);
+    expect(
+      () => new (Reference as any)('https://example.com/', 'Example Domain', 0),
+    ).toThrow(TypeError);
   });
 });
 

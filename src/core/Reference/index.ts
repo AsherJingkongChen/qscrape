@@ -2,7 +2,16 @@
  * ## Introduction
  * A reference holds a resource link and name
  */
-export class Reference {
+export type ReferenceLike = {
+  link: string;
+  name: string;
+};
+
+/**
+ * ## Introduction
+ * A reference holds a resource link and name
+ */
+export class Reference implements ReferenceLike {
   readonly link: string;
   readonly name: string;
 
@@ -24,30 +33,46 @@ export class Reference {
 
   /**
    * ## Introduction
-   * Clones a reference
+   * Creates a reference by copying properties from another object
    *
    * ## Parameters
-   * - `source`: `Reference`
-   *   + A reference to clone
+   * - `source`: `ReferenceLike`
+   *   + An object to copy properties from
    */
-  constructor(source: Reference);
+  constructor(source: ReferenceLike);
 
-  constructor(...args: unknown[]) {
-    if (typeof args[0] === 'string') {
-      const url = new URL(args[0]);
-      this.link = url.href;
-      if (!args[1]) {
-        this.name = url.host;
-      } else if (typeof args[1] === 'string') {
-        this.name = args[1];
-      } else {
-        throw new TypeError('The second argument is invalid');
-      }
-    } else if (args[0] instanceof Reference && !args[1]) {
-      this.link = args[0].link;
-      this.name = args[0].name;
-    } else {
-      throw new TypeError('The arguments are invalid');
+  constructor(...args: any[]) {
+    switch (args.length) {
+      case 1:
+        if (typeof args[0] === 'string') {
+          const url = new URL(args[0]);
+          this.link = url.href;
+          this.name = url.host;
+        } else if (
+          typeof args[0]?.link === 'string' &&
+          typeof args[0]?.name === 'string'
+        ) {
+          this.link = args[0].link;
+          this.name = args[0].name;
+        } else {
+          throw new TypeError('The first argument is invalid');
+        }
+        break;
+      case 2:
+        if (typeof args[0] === 'string') {
+          const url = new URL(args[0]);
+          this.link = url.href;
+          if (typeof args[1] === 'string' || args[1] === null) {
+            this.name = args[1] || url.host;
+          } else {
+            throw new TypeError('The second argument is invalid');
+          }
+        } else {
+          throw new TypeError('The first argument is invalid');
+        }
+        break;
+      default:
+        throw new TypeError('The number of arguments is incorrect');
     }
     Object.freeze(this);
   }
