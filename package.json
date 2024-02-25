@@ -11,6 +11,8 @@
     "jsdom": "^24.0.0"
   },
   "devDependencies": {
+    "@inquirer/testing": "^2.1.11",
+    "@inquirer/type": "^1.2.0",
     "@types/jsdom": "^21.1.6",
     "@types/node": "^20",
     "@vitest/coverage-istanbul": "^1.2.2",
