@@ -27,6 +27,7 @@ export default defineConfig((env) => ({
   test: {
     coverage: {
       enabled: true,
+      exclude: ['src/bin.ts'],
       include: ['src/**/*.ts'],
       provider: 'istanbul',
       reporter: ['text', 'text-summary'],

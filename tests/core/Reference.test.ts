@@ -16,13 +16,11 @@ describe('new Reference()', () => {
     expect(new Reference(link, '').name).toBe('example.com');
   });
 
-  it('It throws if parameters are invalid', async () => {
-    await expect(new Promise(() => new Reference(1 as any))).rejects.toThrow(
+  it('It throws if parameters are invalid', () => {
+    expect(() => new Reference(0 as any)).toThrow(TypeError);
+    expect(() => new Reference('https://example.com/', 1 as any)).toThrow(
       TypeError,
     );
-    await expect(
-      new Promise(() => new Reference('https://example.com/', 1 as any)),
-    ).rejects.toThrow(TypeError);
   });
 });
 

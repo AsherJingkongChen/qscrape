@@ -23,8 +23,15 @@ describe('explicitBind()', () => {
 
   it('It returns an iterable object', () => {
     const opt = { index: 4 };
-    expect(Array.from(explicitBind(charAt, 'Hello', opt))).toEqual([charAt, 'Hello', opt]);
-    expect(Array.from(explicitBind(charAt, 'the World!'))).toEqual([charAt, 'the World!']);
+    expect(Array.from(explicitBind(charAt, 'Hello', opt))).toEqual([
+      charAt,
+      'Hello',
+      opt,
+    ]);
+    expect(Array.from(explicitBind(charAt, 'the World!'))).toEqual([
+      charAt,
+      'the World!',
+    ]);
   });
 
   it('It returns the bound function which returns the correct value', () => {
