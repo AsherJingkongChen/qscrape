@@ -1,5 +1,6 @@
 import { render } from '@inquirer/testing';
 import { QScrape } from 'src/feat';
+import { inspect } from 'util';
 import { describe, expect, it } from 'vitest';
 
 describe('QScrape.prompts.confirmation()', () => {
@@ -14,23 +15,26 @@ describe('QScrape.prompts.confirmation()', () => {
 describe('QScrape.prompts.referenceLink()', () => {
   it('It has a default answer', async () => {
     const [prompt, props, options] = QScrape.prompts.referenceLink();
-    const { answer, events, getScreen } = await render(prompt, props, options);
-    console.log(getScreen());
+    const { answer, events } = await render(prompt, props, options);
     events.keypress('enter');
-    console.log(getScreen());
-
-    await Promise.resolve();
-    console.log(getScreen());
-
     await expect(answer).resolves.toBeTypeOf('string');
   });
 
-  // it('It validates the input', async () => {
-  //   const [prompt, props, options] = QScrape.prompts.referenceLink('examplecom');
-  //   const { answer, events } = await render(prompt, props, options);
-  //   events.keypress('enter');
-  //   await expect(answer).resolves.toBe(false);
-  // });
+  it('It validates the input', async () => {
+    const [prompt, props, options] = QScrape.prompts.referenceLink();
+    const { answer, events } = await render(prompt, props, options);
+    events.type('f');
+    events.keypress('enter');
+    expect(inspect(answer)).toContain('pending');
+
+    // Wait for the next tick
+    await Promise.resolve();
+
+    events.keypress('backspace');
+    events.type('https://about.google/commitments/');
+    events.keypress('enter');
+    await expect(answer).resolves.toBeTypeOf('string');
+  });
 });
 
 describe('QScrape.prompts.referenceName()', () => {

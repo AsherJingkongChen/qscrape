@@ -12,7 +12,7 @@ import { QScrapeMain } from './main';
  */
 export async function QScrapeRun(): Promise<true> {
   try {
-    await QScrapeMain()
+    await QScrapeMain();
   } catch (error) {
     QScrapeError(error);
   } finally {
