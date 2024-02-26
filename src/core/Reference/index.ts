@@ -55,7 +55,7 @@ export class Reference implements ReferenceLike {
           this.link = args[0].link;
           this.name = args[0].name;
         } else {
-          throw new TypeError('The first argument is invalid');
+          throw new TypeError(`The first argument is invalid: ${args[0]}`);
         }
         break;
       case 2:
@@ -65,14 +65,16 @@ export class Reference implements ReferenceLike {
           if (typeof args[1] === 'string' || args[1] === null) {
             this.name = args[1] || url.host;
           } else {
-            throw new TypeError('The second argument is invalid');
+            throw new TypeError(`The second argument is invalid: ${args[1]}`);
           }
         } else {
-          throw new TypeError('The first argument is invalid');
+          throw new TypeError(`The first argument is invalid: ${args[0]}`);
         }
         break;
       default:
-        throw new TypeError('The number of arguments is incorrect');
+        throw new TypeError(
+          `The number of arguments is incorrect: ${args.length}`,
+        );
     }
     Object.freeze(this);
   }
