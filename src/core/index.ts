@@ -1,3 +1,3 @@
 export * from './Queue';
-export * from './Reference';
+export * from './Resource';
 export * from './Utilities';

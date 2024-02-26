@@ -1,23 +1,23 @@
 /**
  * ## Introduction
- * A reference holds a resource link and name
+ * A resource holds a resource link and name
  */
-export type ReferenceLike = {
+export type ResourceLike = {
   link: string;
   name: string;
 };
 
 /**
  * ## Introduction
- * A reference holds a resource link and name
+ * A resource holds a resource link and name
  */
-export class Reference implements ReferenceLike {
+export class Resource implements ResourceLike {
   readonly link: string;
   readonly name: string;
 
   /**
    * ## Introduction
-   * Creates a reference from a resource link and name
+   * Creates a resource from a resource link and name
    *
    * ## Parameters
    * - `link`: `string`
@@ -33,13 +33,13 @@ export class Reference implements ReferenceLike {
 
   /**
    * ## Introduction
-   * Creates a reference by copying properties from another object
+   * Creates a resource by copying properties from another object
    *
    * ## Parameters
-   * - `source`: `ReferenceLike`
+   * - `source`: `ResourceLike`
    *   + An object to copy properties from
    */
-  constructor(source: ReferenceLike);
+  constructor(source: ResourceLike);
 
   constructor(...args: any[]) {
     switch (args.length) {
@@ -81,7 +81,7 @@ export class Reference implements ReferenceLike {
 
   /**
    * ## Introduction
-   * Converts a reference to a string
+   * Converts a resource to a string
    *
    * ## Note
    * - The string format adapts Markdown syntax: `[name](link)`
@@ -93,42 +93,42 @@ export class Reference implements ReferenceLike {
 
   /**
    * ## Introduction
-   * Extracts references from an HTML document
+   * Extracts resources from an HTML document
    *
    * ## Parameters
    * - `html`: `Document`
    *   + An HTML Document
    *
    * ## Yields
-   * - `Reference`
-   *   + A reference extracted from `html.body`
+   * - `Resource`
+   *   + A resource extracted from `html.body`
    */
-  static *fromHtml(html: Document): Generator<Reference> {
+  static *fromHtml(html: Document): Generator<Resource> {
     const { body, location } = html;
     for (const anchor of body.getElementsByTagName('a')) {
       const link = new URL(anchor.href, location.href).href;
-      yield new Reference(link, anchor.textContent);
+      yield new Resource(link, anchor.textContent);
     }
   }
 
   /**
    * ## Introduction
-   * Extracts references from text data
+   * Extracts resources from text data
    *
    * ## Parameters
    * - `text`: `string`
    *   + A text data
    *
    * ## Yields
-   * - `Reference`
-   *   + A reference extracted from `text`
+   * - `Resource`
+   *   + A resource extracted from `text`
    */
-  static *fromText(text: string): Generator<Reference> {
+  static *fromText(text: string): Generator<Resource> {
     for (const link of text.match(/\bhttps?:\/\/[!-~]+\b/gi) ?? []) {
       try {
-        yield new Reference(link);
+        yield new Resource(link);
       } catch {
-        // Ignore invalid references
+        // Ignore invalid resources
         continue;
       }
     }
