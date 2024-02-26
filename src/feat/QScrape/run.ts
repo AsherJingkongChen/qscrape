@@ -1,11 +1,9 @@
+import type { QScrape } from '.';
 import { error } from './error';
 import { finish } from './finish';
 import { main } from './main';
 
-/**
- * `QScrape.run`
- */
-export async function run(): Promise<true> {
+export const run: QScrape['run'] = async function run() {
   await main().catch(error).finally(finish);
   return true;
-}
+};

@@ -1,12 +1,10 @@
+import type { QScrape } from '.';
 import { Resource } from '../../core';
 
-/**
- * `QScrape.context`
- */
-export const context = Object.freeze({
+export const context: QScrape['context'] = {
   result: [] as Resource[],
   streams: {
     input: process.stdin as NodeJS.ReadableStream,
     output: process.stdout as NodeJS.WritableStream,
   },
-});
+};

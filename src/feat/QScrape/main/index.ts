@@ -1,3 +1,4 @@
+import type { QScrape } from '..';
 import { Resource, Queue } from '../../../core';
 import { context } from '../context';
 import { getInitialLink } from './getInitialLink';
@@ -8,10 +9,7 @@ import { edit } from 'external-editor';
 import confirm from '@inquirer/confirm';
 import select from '@inquirer/select';
 
-/**
- * `QScrape.main`
- */
-export async function main(): Promise<void> {
+export const main: QScrape['main'] = async function main() {
   context.streams.output.write(`Q-Scrape: Explore the Web${EOL}`);
   const resourceQueue = new Queue([new Resource(await getInitialLink())]);
   for (const resource of resourceQueue) {
@@ -88,4 +86,4 @@ export async function main(): Promise<void> {
     }
     resourceQueue.push(...relatedResources);
   }
-}
+};

@@ -1,7 +1,8 @@
+import type { QScrape } from '.';
 import { context } from './context';
 import { EOL } from 'os';
 
-export const finish = () => {
+export const finish: QScrape['finish'] = function finish() {
   console.warn('QScrape has finished running!');
 
   const markdownResult = {
