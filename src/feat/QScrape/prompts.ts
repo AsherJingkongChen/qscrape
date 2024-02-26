@@ -30,16 +30,19 @@ export namespace QScrapePrompts {
    * - `message`: `string | undefined`
    *   + A message to display
    *   + It defaults to `Continue?`
+   * - `defaultAnswer`: `boolean | undefined`
+   *   + The default answer
+   *   + It defaults to `true`
    *
    * ## Returns
    * - `ExplicitBoundFunction`
    *   + A prompt function
    */
-  export function confirmation(message?: string) {
+  export function confirmation(message?: string, defaultAnswer?: boolean) {
     return explicitBind(
       confirm,
       {
-        default: true,
+        default: defaultAnswer ?? true,
         message: message ?? 'Continue?',
       },
       context,
