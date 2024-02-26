@@ -9,3 +9,6 @@ export namespace QScrape {
   export import prompts = QScrapePrompts;
   export import run = QScrapeRun;
 }
+
+export * from './prompts';
+export * from './run';

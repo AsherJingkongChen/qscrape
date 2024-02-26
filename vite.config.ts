@@ -95,7 +95,7 @@ function ChangeExecutablePermissionPlugin(): PluginOption {
 function DtsPlugin(): PluginOption {
   return ViteDtsPlugin({
     entryRoot: '.',
-    include: 'src',
+    include: ['src'],
     insertTypesEntry: true,
     rollupTypes: true,
   });
