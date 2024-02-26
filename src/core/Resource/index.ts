@@ -52,8 +52,9 @@ export class Resource implements ResourceLike {
           typeof args[0]?.link === 'string' &&
           typeof args[0]?.name === 'string'
         ) {
-          this.link = args[0].link;
-          this.name = args[0].name;
+          const url = new URL(args[0].link);
+          this.link = url.href;
+          this.name = args[0].name || url.host;
         } else {
           throw new TypeError(`The first argument is invalid: ${args[0]}`);
         }

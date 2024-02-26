@@ -12,9 +12,16 @@ describe('new Resource()', () => {
 
   it('Its default name is the host of link', () => {
     const link = 'https://example.com/';
-    expect(new Resource(link).name).toBe('example.com');
-    expect(new Resource(link, '').name).toBe('example.com');
-    expect(new Resource(link, null).name).toBe('example.com');
+    const host = new URL(link).host;
+    const name = 'Example Domain';
+
+    expect(new Resource(link, name).name).toBe(name);
+    expect(new Resource(link).name).toBe(host);
+    expect(new Resource(link, '').name).toBe(host);
+    expect(new Resource(link, null).name).toBe(host);
+
+    expect(new Resource({ link, name }).name).toBe(name);
+    expect(new Resource({ link, name: '' }).name).toBe(host);
   });
 
   it('It throws if parameters are invalid', () => {
@@ -26,6 +33,11 @@ describe('new Resource()', () => {
     expect(
       () => new (Resource as any)('https://example.com/', 'Example Domain', 0),
     ).toThrow(TypeError);
+  });
+
+  it('It throws if the link is invalid', () => {
+    expect(() => new Resource('http://%invalid%')).toThrow(TypeError);
+    expect(() => new Resource({ link: 'http://%invalid%', name: '' })).toThrow(TypeError);
   });
 });
 
