@@ -2,7 +2,17 @@ import { context } from '../context';
 import { EOL } from 'os';
 
 /**
- *
+ * ## Introduction
+ * Gets a successful response from a link
+ * 
+ * ## Parameters
+ * - `link`: `string`
+ *   + A resource link
+ * 
+ * ## Returns
+ * - `Promise<Response | undefined>`
+ *   + Resolves to a successful response
+ *   + It is `undefined` if the resource is not available
  */
 export async function getSuccessfulResponse(
   link: string,

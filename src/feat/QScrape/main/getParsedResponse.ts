@@ -4,7 +4,17 @@ import { JSDOM } from 'jsdom';
 import { EOL } from 'os';
 
 /**
- *
+ * ## Introduction
+ * The result type of `getParsedResponse`
+ * 
+ * ## Layout
+ * - `Object`
+ *   - `documentTitle`: `string | undefined`
+ *     + The title of the document if it is an HTML document
+ *   - `relatedResources`: `Resource[]`
+ *     + All related resources found in the content
+ *   - `textContent`: `string`
+ *     + The text content of the document
  */
 export type ParsedResponse = {
   documentTitle?: string;
@@ -13,7 +23,17 @@ export type ParsedResponse = {
 };
 
 /**
- *
+ * ## Introduction
+ * Parses a successful response
+ * 
+ * ## Parameters
+ * - `response`: `Response`
+ *   + A successful response
+ * 
+ * ## Returns
+ * - `Promise<ParsedResponse | undefined>`
+ *   + The result of parsing a response
+ *   + It is `undefined` if the media type is not available
  */
 export async function getParsedResponse(
   response: Response,
