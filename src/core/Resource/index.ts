@@ -56,7 +56,7 @@ export class Resource implements ResourceLike {
           this.link = url.href;
           this.name = args[0].name || url.host;
         } else {
-          throw new TypeError(`The first argument is invalid: ${args[0]}`);
+          throw new TypeError(`The first parameter is invalid: ${args[0]}`);
         }
         break;
       case 2:
@@ -66,15 +66,15 @@ export class Resource implements ResourceLike {
           if (typeof args[1] === 'string' || args[1] === null) {
             this.name = args[1] || url.host;
           } else {
-            throw new TypeError(`The second argument is invalid: ${args[1]}`);
+            throw new TypeError(`The second parameter is invalid: ${args[1]}`);
           }
         } else {
-          throw new TypeError(`The first argument is invalid: ${args[0]}`);
+          throw new TypeError(`The first parameter is invalid: ${args[0]}`);
         }
         break;
       default:
         throw new TypeError(
-          `The number of arguments is incorrect: ${args.length}`,
+          `The number of parameters is incorrect: ${args.length}`,
         );
     }
     Object.freeze(this);

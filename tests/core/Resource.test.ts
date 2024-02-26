@@ -37,7 +37,9 @@ describe('new Resource()', () => {
 
   it('It throws if the link is invalid', () => {
     expect(() => new Resource('http://%invalid%')).toThrow(TypeError);
-    expect(() => new Resource({ link: 'http://%invalid%', name: '' })).toThrow(TypeError);
+    expect(() => new Resource({ link: 'http://%invalid%', name: '' })).toThrow(
+      TypeError,
+    );
   });
 });
 
