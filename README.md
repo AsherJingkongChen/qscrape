@@ -47,6 +47,7 @@ We've provided a **command line tool** and a **library** for you, which are simp
 - Environments
   - [Node.js v20](https://nodejs.org/)
 - Libraries
+  - [External Editor](https://github.com/mrkmg/node-external-editor)
   - [Inquirer.js](https://github.com/SBoudrias/Inquirer.js)
   - [JSDOM](https://github.com/jsdom/jsdom)
 - Linters
