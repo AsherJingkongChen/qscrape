@@ -21,13 +21,13 @@ export default defineConfig((env) => ({
   plugins: [
     BundleFinishBannerPlugin(env),
     ChangeExecutablePermissionPlugin(),
-    DtsPlugin(),
+    DtsPlugin(env),
     RemoveMultiLineCommentsPlugin(env),
   ],
   test: {
     coverage: {
       enabled: true,
-      exclude: ['src/bin.ts', 'src/feat/QScrape/run/{index,main}.ts'],
+      exclude: ['src/bin.ts', 'src/feat/QScrape/{main/*,run}.ts'],
       include: ['src/**/*.ts'],
       provider: 'istanbul',
       reporter: ['text', 'text-summary'],
@@ -92,13 +92,15 @@ function ChangeExecutablePermissionPlugin(): PluginOption {
   };
 }
 
-function DtsPlugin(): PluginOption {
-  return ViteDtsPlugin({
-    entryRoot: '.',
-    include: ['src'],
-    insertTypesEntry: true,
-    rollupTypes: true,
-  });
+function DtsPlugin(context: { mode: string }): PluginOption {
+  return context.mode === 'production'
+    ? ViteDtsPlugin({
+        entryRoot: '.',
+        include: ['src'],
+        insertTypesEntry: true,
+        rollupTypes: true,
+      })
+    : undefined;
 }
 
 function RemoveMultiLineCommentsPlugin(context: {
