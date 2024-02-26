@@ -120,7 +120,7 @@ export const main: QScrape['main'] = async function main() {
       context.result.push(new Resource(link, name));
     }
 
-    // Confirms if the user wants to continue to scrape the next resource
+    // Confirms if the user wants to continue to explore
     const doContinue = await select(
       {
         choices: [
@@ -138,11 +138,13 @@ export const main: QScrape['main'] = async function main() {
       },
       context.streams,
     );
-    if (!doContinue) {
-      break;
+    if (doContinue) {
+      if (doSave) {
+        // Pushes the related resources to the queue
+        resourcesToScrape.push(...relatedResources);
+      }
+      continue;
     }
-
-    // Pushes the related resources to the queue
-    resourcesToScrape.push(...relatedResources);
+    break;
   }
 };
