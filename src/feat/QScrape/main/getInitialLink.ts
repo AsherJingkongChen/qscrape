@@ -1,6 +1,9 @@
 import { context } from '../context';
 import input from '@inquirer/input';
 
+/**
+ * 
+ */
 export async function getInitialLink(): Promise<string> {
   return await input(
     {

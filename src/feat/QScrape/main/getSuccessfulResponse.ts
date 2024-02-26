@@ -1,6 +1,9 @@
 import { context } from '../context';
 import { EOL } from 'os';
 
+/**
+ *
+ */
 export async function getSuccessfulResponse(
   link: string,
 ): Promise<Response | undefined> {

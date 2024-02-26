@@ -3,12 +3,18 @@ import { context } from '../context';
 import { JSDOM } from 'jsdom';
 import { EOL } from 'os';
 
+/**
+ *
+ */
 export type ParsedResponse = {
   documentTitle?: string;
   relatedResources: Resource[];
   textContent: string;
 };
 
+/**
+ *
+ */
 export async function getParsedResponse(
   response: Response,
 ): Promise<ParsedResponse | undefined> {

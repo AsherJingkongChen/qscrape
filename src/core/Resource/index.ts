@@ -1,6 +1,6 @@
 /**
  * ## Introduction
- * A resource holds a link and name
+ * A resource holds a link and its name
  */
 export type ResourceLike = {
   link: string;
@@ -9,7 +9,7 @@ export type ResourceLike = {
 
 /**
  * ## Introduction
- * A resource holds a link and name
+ * A resource holds a link and its name
  */
 export class Resource implements ResourceLike {
   readonly link: string;
