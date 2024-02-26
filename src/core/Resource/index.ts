@@ -1,6 +1,6 @@
 /**
  * ## Introduction
- * A resource holds a resource link and name
+ * A resource holds a link and name
  */
 export type ResourceLike = {
   link: string;
@@ -9,7 +9,7 @@ export type ResourceLike = {
 
 /**
  * ## Introduction
- * A resource holds a resource link and name
+ * A resource holds a link and name
  */
 export class Resource implements ResourceLike {
   readonly link: string;
@@ -17,7 +17,7 @@ export class Resource implements ResourceLike {
 
   /**
    * ## Introduction
-   * Creates a resource from a resource link and name
+   * Creates a resource from a link and a name
    *
    * ## Parameters
    * - `link`: `string`
@@ -33,7 +33,7 @@ export class Resource implements ResourceLike {
 
   /**
    * ## Introduction
-   * Creates a resource by copying properties from another object
+   * Creates a resource by copying properties from an object
    *
    * ## Parameters
    * - `source`: `ResourceLike`
@@ -93,7 +93,7 @@ export class Resource implements ResourceLike {
 
   /**
    * ## Introduction
-   * Extracts resources from an HTML document
+   * Finds resources from an HTML document
    *
    * ## Parameters
    * - `html`: `Document`
@@ -113,7 +113,7 @@ export class Resource implements ResourceLike {
 
   /**
    * ## Introduction
-   * Extracts resources from text data
+   * Finds resources from text data
    *
    * ## Parameters
    * - `text`: `string`

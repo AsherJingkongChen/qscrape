@@ -7,7 +7,9 @@
   "bin": "./dist/bin.js",
   "description": "Explore the Web",
   "dependencies": {
-    "@inquirer/prompts": "^4.1.0",
+    "@inquirer/confirm": "^3.0.0",
+    "@inquirer/input": "^2.0.0",
+    "@inquirer/select": "^2.0.0",
     "external-editor": "^3.1.0",
     "jsdom": "^24.0.0"
   },

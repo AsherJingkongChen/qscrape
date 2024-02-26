@@ -57,8 +57,12 @@ import DataForResourceFromText from 'tests/testUtils/data/application-java-archi
 
 describe('Resource.fromText()', () => {
   it('It returns an empty array if no links are found', () => {
-    expect(Array.from(Resource.fromText('No http links here')).length).toBeFalsy();
-    expect(Array.from(Resource.fromText('http://%invalid%')).length).toBeFalsy();
+    expect(
+      Array.from(Resource.fromText('No http links here')).length,
+    ).toBeFalsy();
+    expect(
+      Array.from(Resource.fromText('http://%invalid%')).length,
+    ).toBeFalsy();
   });
 
   it('It extracts the exact links and names', () => {
