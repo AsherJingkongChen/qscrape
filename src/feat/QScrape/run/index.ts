@@ -11,12 +11,13 @@ import { QScrapeMain } from './main';
  *   + Resolves when the main tasks has finished running
  */
 export async function QScrapeRun(): Promise<true> {
+  let result: QScrapeMain.Result | undefined;
   try {
-    await QScrapeMain();
+    result = await QScrapeMain();
   } catch (error) {
     QScrapeError(error);
   } finally {
-    QScrapeFinish();
+    QScrapeFinish(result);
   }
   return true;
 }
@@ -26,3 +27,7 @@ export namespace QScrapeRun {
   export import finish = QScrapeFinish;
   export import main = QScrapeMain;
 }
+
+export * from './error';
+export * from './finish';
+export * from './main';
