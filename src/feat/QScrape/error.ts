@@ -1,6 +1,6 @@
 /**
  * ## Introduction
- * Handles an error of `QScrape`
+ * Handles an error thrown from `QScrape`
  *
  * ## Parameters
  * - `error`: `unknown`

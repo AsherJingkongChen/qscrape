@@ -1,18 +1,18 @@
-import { QScrapeMain } from './main';
+import { QScrapeContext } from './context';
 
 /**
  * ## Introduction
- * Handles post tasks of `QScrape`
+ * Handles the post tasks of `QScrape`
  *
  * ## Note
  * - This function should not throw
  */
 export function QScrapeFinish(): void {
   console.warn('QScrape has finished running!');
-  console.log(QScrapeMain);
+  console.log(QScrapeContext.result);
 
   // Clear the result after processing it
-  QScrapeMain.result.splice(0, QScrapeMain.result.length);
+  QScrapeContext.result.splice(0, QScrapeContext.result.length);
 }
 
 export namespace QScrapeFinish {}
