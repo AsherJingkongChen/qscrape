@@ -93,22 +93,22 @@ export class Reference implements ReferenceLike {
 
   /**
    * ## Introduction
-   * Extracts references from an HTML element
+   * Extracts references from an HTML document
    *
    * ## Parameters
-   * - `html`: `HTMLElement`
-   *   + An HTML element
+   * - `html`: `Document`
+   *   + An HTML Document
    *
-   * ## Returns
-   * - `Reference[]`
-   *   + References extracted from `html`
+   * ## Yields
+   * - `Reference`
+   *   + A reference extracted from `html.body`
    */
-  static fromHtml(html: HTMLElement): Reference[] {
-    const results = new Array<Reference>();
-    for (const anchor of html.getElementsByTagName('a')) {
-      results.push(new Reference(anchor.href, anchor.textContent));
+  static *fromHtml(html: Document): Generator<Reference> {
+    const { body, location } = html;
+    for (const anchor of body.getElementsByTagName('a')) {
+      const link = new URL(anchor.href, location.href).href;
+      yield new Reference(link, anchor.textContent);
     }
-    return results;
   }
 
   /**
@@ -119,15 +119,18 @@ export class Reference implements ReferenceLike {
    * - `text`: `string`
    *   + A text data
    *
-   * ## Returns
-   * - `Reference[]`
-   *   + References extracted from `text`
+   * ## Yields
+   * - `Reference`
+   *   + A reference extracted from `text`
    */
-  static fromText(text: string): Reference[] {
-    return (
-      text
-        .match(/\bhttps?:\/\/[!-~]+\b/gi)
-        ?.map((link) => new Reference(link)) ?? []
-    );
+  static *fromText(text: string): Generator<Reference> {
+    for (const link of text.match(/\bhttps?:\/\/[!-~]+\b/gi) ?? []) {
+      try {
+        yield new Reference(link);
+      } catch {
+        // Ignore invalid references
+        continue;
+      }
+    }
   }
 }

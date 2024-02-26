@@ -45,7 +45,7 @@ import DataForReferenceFromHtml from 'tests/testUtils/data/example-com.html.json
 describe('Reference.fromHtml()', () => {
   it('It extracts the exact links and names', () => {
     const { document } = new JSDOM(DataForReferenceFromHtml).window;
-    const refs = Reference.fromHtml(document.documentElement);
+    const refs = Array.from(Reference.fromHtml(document));
     expect(refs.length).toBe(1);
 
     expect(refs[0]!.link).toBe('https://www.iana.org/domains/example');
@@ -57,12 +57,12 @@ import DataForReferenceFromText from 'tests/testUtils/data/application-java-arch
 
 describe('Reference.fromText()', () => {
   it('It returns an empty array if no links are found', () => {
-    const refs = Reference.fromText('No http links here');
+    const refs = Array.from(Reference.fromText('No http links here'));
     expect(refs.length).toBeFalsy();
   });
 
   it('It extracts the exact links and names', () => {
-    const refs = Reference.fromText(DataForReferenceFromText);
+    const refs = Array.from(Reference.fromText(DataForReferenceFromText));
     expect(refs.length).toBe(3);
 
     expect(refs[0]!.link).toBe('https://jcp.org/en/jsr/detail?id=394');
