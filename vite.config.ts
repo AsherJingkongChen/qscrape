@@ -125,7 +125,9 @@ function RemoveMultiLineCommentsPlugin(context: {
               if (bundle.type !== 'chunk') {
                 continue;
               }
-              bundle.code = bundle.code.replace(/\s*\/\*\*[^\/]*\*\//g, '');
+              bundle.code = bundle.code
+                .replace(/\s*\/\*\*[^\/]*\*\//g, '')
+                .replace(/^ */gm, '');
             }
             this.info({
               message: '\x1b[32m' + 'Done' + '\x1b[0m',
