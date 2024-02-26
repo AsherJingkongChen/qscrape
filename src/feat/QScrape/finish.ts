@@ -1,18 +1,14 @@
-import { QScrapeContext } from './context';
+import { context } from './context';
+import { EOL } from 'os';
 
-/**
- * ## Introduction
- * Handles the post tasks of `QScrape`
- *
- * ## Note
- * - This function should not throw
- */
-export function QScrapeFinish(): void {
+export const finish = () => {
   console.warn('QScrape has finished running!');
-  console.log(QScrapeContext.result);
 
-  // Clear the result after processing it
-  QScrapeContext.result.splice(0, QScrapeContext.result.length);
-}
-
-export namespace QScrapeFinish {}
+  const markdownResult = {
+    start: '---',
+    heading: '## Resources',
+    resourceList: `- ${context.result.join(`${EOL}- `)}${EOL}`,
+  };
+  context.streams.output.write(Object.values(markdownResult).join(EOL));
+  context.result.splice(0, context.result.length);
+};

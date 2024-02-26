@@ -1,18 +1,7 @@
 /**
- * ## Introduction
- * Handles an error thrown from `QScrape`
- *
- * ## Parameters
- * - `error`: `unknown`
- *   + An unknown error
- *
- * ## Note
- * - It throws for general errors
- * - It doesn't throw for signal errors
- *   + e.g. If a user sends `SIGINT`,
- *     the program will exit asynchronously with the signal exit code `128 + 2`
+ * `QScrape.error`
  */
-export function QScrapeError(error: unknown): void {
+export function error(error: unknown): void {
   if (!(error instanceof Error)) {
     throw error;
   }
@@ -24,5 +13,3 @@ export function QScrapeError(error: unknown): void {
   }
   throw error;
 }
-
-export namespace QScrapeError {}
