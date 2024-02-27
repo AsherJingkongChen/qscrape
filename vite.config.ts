@@ -27,7 +27,7 @@ export default defineConfig((env) => ({
   test: {
     coverage: {
       enabled: true,
-      exclude: ['src/bin.ts', 'src/feat/QScrape/{main/*,run}.ts'],
+      exclude: ['src/bin.ts', 'src/feat/QScrape/{main/**/*,run}.ts'],
       include: ['src/**/*.ts'],
       provider: 'istanbul',
       reporter: ['text', 'text-summary'],
