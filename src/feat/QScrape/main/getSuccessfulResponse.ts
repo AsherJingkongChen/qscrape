@@ -11,8 +11,8 @@ import { EOL } from 'os';
  * 
  * ## Returns
  * - `Promise<Response | undefined>`
- *   + Resolves to a successful response
- *   + It is `undefined` if the resource is not available
+ *   + Resolves to a successful response,
+ *     or `undefined` if the resource is not available
  */
 export async function getSuccessfulResponse(
   link: string,

@@ -1,7 +1,7 @@
 import type { QScrape } from '..';
 import { Resource, Queue } from '../../../core';
 import { context } from '../context';
-import { getInitialLink } from './getInitialLink';
+import { requestLink } from './requestLink';
 import { getSuccessfulResponse } from './getSuccessfulResponse';
 import { getParsedResponse } from './getParsedResponse';
 import { getPrettyLinkName } from './getPrettyLinkName';
@@ -11,34 +11,13 @@ import select from '@inquirer/select';
 
 export const main: QScrape['main'] = async function main() {
   // Shows the program heading
-  context.streams.output.write(`Q-Scrape: Explore the Web${EOL}`);
+  context.streams.output.write(`> Q-Scrape: Explore the Web${EOL}`);
 
   // Creates a queue of resources to scrape
-  const resourcesToScrape = new Queue([new Resource(await getInitialLink())]);
+  const resourcesToScrape = new Queue([new Resource(await requestLink())]);
   for (let { link, name } of resourcesToScrape) {
-    // Confirms if the user wants to scrape the resource
-    const doScrape = await select(
-      {
-        choices: [
-          {
-            name: 'Yes',
-            value: true,
-          },
-          {
-            name: 'No',
-            value: false,
-          },
-        ],
-        default: true,
-        message: `Do you want to scrape "${link}"?`,
-      },
-      context.streams,
-    );
-    if (!doScrape) {
-      continue;
-    }
-
     // Fetches the resource
+    context.streams.output.write(`> Fetching "${link}" ...${EOL}`);
     const response = await getSuccessfulResponse(link);
     if (!response) {
       continue;

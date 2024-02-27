@@ -3,13 +3,13 @@ import input from '@inquirer/input';
 
 /**
  * ## Introduction
- * Gets the initial link for `QScrape.main` to explore from
+ * Requests a resource link to scrape
  * 
  * ## Returns
  * - `Promise<string>`
- *   + Resolves to the initial link to scrape
+ *   + Resolves to a link
  */
-export async function getInitialLink(): Promise<string> {
+export async function requestLink(): Promise<string> {
   return await input(
     {
       default: 'https://example.com/',
