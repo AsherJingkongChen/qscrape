@@ -40,6 +40,7 @@ export type QScrape = {
        *     + It defaults to `process.stdin`
        */
       input: NodeJS.ReadableStream;
+
       /**
        * ## Introduction
        * The output stream for `QScrape`

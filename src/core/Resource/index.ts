@@ -27,7 +27,7 @@ export class Resource implements ResourceLike {
    *   + It defaults to the host of `link`
    *
    * ## Note
-   * - The constructor uses `URL.constructor` to parse the link
+   * - It uses `URL.constructor` to parse the link
    */
   constructor(link: string, name?: string | null);
 

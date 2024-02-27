@@ -3,8 +3,8 @@ import input from '@inquirer/input';
 
 /**
  * ## Introduction
- * Inquires a resource link to scrape
- * 
+ * Inquires the resource link to scrape
+ *
  * ## Returns
  * - `Promise<string>`
  *   + Resolves to a resource link
