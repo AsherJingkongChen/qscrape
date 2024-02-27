@@ -1,3 +1,4 @@
+import { QuietError } from 'src/core';
 import { QScrape } from 'src/feat';
 import { describe, expect, it } from 'vitest';
 
@@ -13,11 +14,15 @@ describe('QScrape.error()', () => {
     expect(() => QScrape.error('An error occurred')).toThrow();
   });
 
-  describe('It sends signal exit code when receiving special errors', () => {
+  describe('It handles special errors differently', () => {
     it('Error: User force closed the prompt ...', () => {
       QScrape.error(new Error('User force closed the prompt ...'));
       expect(process.exitCode).toBeGreaterThanOrEqual(128);
       process.exitCode = 0;
+    });
+
+    it('QuietError', () => {
+      expect(() => QScrape.error(new QuietError())).not.toThrow();
     });
   });
 });
