@@ -14,7 +14,7 @@ export function getPrettyLinkName(link: string): string {
   const { host, pathname } = new URL(link);
   const breadcrumb = pathname
     .split('/')
-    .map((p) => (p[0]?.toLowerCase() ?? '') + p.slice(1))
+    .map((p) => (p[0]?.toUpperCase() ?? '') + p.slice(1))
     .reverse()
     .join(' ')
     .trim()
