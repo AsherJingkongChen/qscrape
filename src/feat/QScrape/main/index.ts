@@ -1,7 +1,7 @@
 import type { QScrape } from '..';
 import { Resource, Queue } from '../../../core';
 import { context } from '../context';
-import { requestLink } from './requestLink';
+import { inquireLink } from './inquireLink';
 import { getSuccessfulResponse } from './getSuccessfulResponse';
 import { getParsedResponse } from './getParsedResponse';
 import { getPrettyLinkName } from './getPrettyLinkName';
@@ -12,9 +12,20 @@ import select from '@inquirer/select';
 export const main: QScrape['main'] = async function main() {
   // Shows the program heading
   context.streams.output.write(`> Q-Scrape: Explore the Web${EOL}`);
+  while (await runUserSession());
+};
 
+/**
+ * ## Introduction
+ * Starts a session of `QScrape.main` and runs it
+ * 
+ * ## Returns
+ * - `Promise<boolean>`
+ *   + `true` if the user wants to continue, otherwise `false`
+ */
+async function runUserSession(): Promise<boolean> {
   // Creates a queue of resources to scrape
-  const resourcesToScrape = new Queue([new Resource(await requestLink())]);
+  const resourcesToScrape = new Queue([new Resource(await inquireLink())]);
   for (let { link, name } of resourcesToScrape) {
     // Fetches the resource
     context.streams.output.write(`> Fetching "${link}" ...${EOL}`);
@@ -96,7 +107,9 @@ export const main: QScrape['main'] = async function main() {
       context.streams,
     );
     if (doSave) {
+      // Saves the resource and pushes the related resources
       context.result.push(new Resource(link, name));
+      resourcesToScrape.push(...relatedResources);
     }
 
     // Confirms if the user wants to continue to explore
@@ -117,13 +130,9 @@ export const main: QScrape['main'] = async function main() {
       },
       context.streams,
     );
-    if (doContinue) {
-      if (doSave) {
-        // Pushes the related resources to the queue
-        resourcesToScrape.push(...relatedResources);
-      }
-      continue;
+    if (!doContinue) {
+      return false;
     }
-    break;
   }
-};
+  return true;
+}

@@ -3,13 +3,13 @@ import input from '@inquirer/input';
 
 /**
  * ## Introduction
- * Requests a resource link to scrape
+ * Inquires a resource link to scrape
  * 
  * ## Returns
  * - `Promise<string>`
- *   + Resolves to a link
+ *   + Resolves to a resource link
  */
-export async function requestLink(): Promise<string> {
+export async function inquireLink(): Promise<string> {
   return await input(
     {
       default: 'https://example.com/',
