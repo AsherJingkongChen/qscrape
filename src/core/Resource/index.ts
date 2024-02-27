@@ -54,7 +54,7 @@ export class Resource implements ResourceLike {
         ) {
           const url = new URL(args[0].link);
           this.link = url.href;
-          this.name = args[0].name || url.host;
+          this.name = args[0].name.trim() || url.host;
         } else {
           throw new TypeError(`The first parameter is invalid: ${args[0]}`);
         }
@@ -64,7 +64,7 @@ export class Resource implements ResourceLike {
           const url = new URL(args[0]);
           this.link = url.href;
           if (typeof args[1] === 'string' || args[1] === null) {
-            this.name = args[1] || url.host;
+            this.name = args[1]?.trim() || url.host;
           } else {
             throw new TypeError(`The second parameter is invalid: ${args[1]}`);
           }

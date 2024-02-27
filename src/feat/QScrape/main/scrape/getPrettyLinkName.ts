@@ -20,9 +20,9 @@ export function getPrettyLinkName(link: string): string {
     .trim()
     .replaceAll(' ', ' - ');
   const cleanPrefix = decodeURIComponent(breadcrumb)
-    .slice(0, 60)
+    .slice(0, 50)
     .replace(/\s+-?\s?$/, '');
-  const prefixEllipsis = cleanPrefix.length < 60 ? '' : ' ...';
+  const prefixEllipsis = cleanPrefix.length < 50 ? '' : ' ...';
   const splitter = cleanPrefix ? ' - ' : '';
   return cleanPrefix + prefixEllipsis + splitter + host;
 }
