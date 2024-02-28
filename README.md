@@ -6,7 +6,7 @@
 
 ## What is it for?
 
-With `qscrape`, you can explore the Web easily. This scraper will continuously bring you web pages. Reading text on the console is all you need to do.
+With `qscrape`, you can explore the Web easily. This scraper will continuously fetch resources from the Web. Playing with the console program is the only thing you need to do.
 
 We've provided a **command line tool** and a **library** for you, which are simple to use. You can obtain `qscrape` from NPM. Please see the section [`How to Obtain`](#how-to-obtain).
 
@@ -33,6 +33,12 @@ We've provided a **command line tool** and a **library** for you, which are simp
   qscrape
   ```
 
+- Import the library to integrate it in your project:
+
+  ```javascript
+  import { QScrape } from 'qscrape';
+  ```
+
 - [Guide _*(WIP)*_]
 
 ## Let's Setup the Project
@@ -53,9 +59,11 @@ We've provided a **command line tool** and a **library** for you, which are simp
 - Environments
   - [Node.js v20](https://nodejs.org/)
 - Libraries
+  - [Chalk](https://github.com/chalk/chalk)
   - [External Editor](https://github.com/mrkmg/node-external-editor)
   - [Inquirer.js](https://github.com/SBoudrias/Inquirer.js)
   - [JSDOM](https://github.com/jsdom/jsdom)
+  - [Ora](https://github.com/sindresorhus/ora)
 - Linters
   - [Prettier](https://prettier.io/)
   - [TypeScript](https://www.typescriptlang.org/)
