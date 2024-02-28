@@ -5,7 +5,8 @@ import { JSDOM } from 'jsdom';
 import { state } from './state';
 import { getPrettyLinkName } from './getPrettyLinkName';
 import cl from 'chalk';
-// import ora from 'ora';
+import ora, { Ora, spinners } from 'ora';
+import { EOL } from 'os';
 
 /**
  * ## Introduction
@@ -19,36 +20,46 @@ import cl from 'chalk';
  * - It depends on `state`
  */
 export async function parseResource(): Promise<boolean> {
-  // const spinner = ora({
-  //   color: 'yellow',
-  //   hideCursor: false,
-  //   stream: context.streams.output,
-  //   prefixText: ``,
-  // }).start();
-  context.streams.output.write(prompt`Fetching ${cl.cyan(state.link)} ...`);
+  const spinner = ora({
+    color: 'yellow',
+    hideCursor: false,
+    prefixText: prompt`Fetching ${cl.cyan(state.link)}`,
+    spinner: spinners.line,
+    stream: context.streams.output,
+  }).start();
 
   // Fetches the resource
   let response: Response | undefined;
   try {
     response = await fetch(state.link, { redirect: 'follow' });
   } catch (error) {
-    return complain(error instanceof Error ? error.message : `${error}`);
-  } finally {
-    // spinner.stop();
+    return complain(error instanceof Error ? error.message : `${error}`, {
+      spinner,
+    });
   }
   if (!response.ok) {
     const { status, statusText } = response;
-    return complain(`HTTP ${status} ${statusText}`);
+    return complain(`HTTP ${status} ${statusText}`, { spinner });
   }
 
   // Reads the response
+  let rawTextContent: string | undefined;
+  try {
+    rawTextContent = await response.text();
+  } catch (error) {
+    return complain(error instanceof Error ? error.message : `${error}`, {
+      spinner,
+    });
+  }
+
+  // Parses the response
   const mediaType = (response.headers.get('content-type') ?? '')
     .split(';')[0]
     ?.toLowerCase();
   switch (mediaType) {
     case 'text/html':
     case 'application/xhtml+xml':
-      const { document } = new JSDOM(await response.text(), {
+      const { document } = new JSDOM(rawTextContent, {
         contentType: mediaType,
         url: response.url,
       }).window;
@@ -58,14 +69,15 @@ export async function parseResource(): Promise<boolean> {
       break;
     case 'text/plain':
       state.altName = getPrettyLinkName(state.link);
-      state.textContent = await response.text();
+      state.textContent = rawTextContent;
       break;
     default:
-      return complain(`Unsupported media type "${mediaType}"`);
+      return complain(`Unsupported media type "${mediaType}"`, { spinner });
   }
   state.relatedResources.push(...Resource.fromText(state.textContent));
 
   // Succeeds with `true`
+  spinner.stopAndPersist({ symbol: '' });
   return true;
 }
 
@@ -81,9 +93,10 @@ export async function parseResource(): Promise<boolean> {
  * - `false`
  *   + A failure
  */
-function complain(reason: string): false {
+function complain(reason: string, state: { spinner: Ora }): false {
+  state.spinner.stopAndPersist({ symbol: '' });
   context.streams.output.write(
-    prompt`${cl.yellow(`The resource is not available: ${reason}`)}`,
+    prompt`${cl.yellow(`The resource is not available: ${reason}`)}${EOL}`,
   );
   return false;
 }
