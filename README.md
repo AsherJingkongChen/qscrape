@@ -27,6 +27,12 @@ We've provided a **command line tool** and a **library** for you, which are simp
 
 ## Let's Learn How to Use It
 
+- Run the following command to start:
+
+  ```shell
+  qscrape
+  ```
+
 - [Guide _*(WIP)*_]
 
 ## Let's Setup the Project
