@@ -24,11 +24,8 @@ export async function inquireToViewContent(): Promise<boolean> {
     await select(
       {
         choices: [
-          {
-            name: `Yes, open in ${viewer.editor.bin}.`,
-            value: true,
-          },
           { name: 'No.', value: false },
+          { name: `Yes, open in ${viewer.editor.bin}.`, value: true },
         ],
         default: false,
         message: 'Do you want to view the content?',

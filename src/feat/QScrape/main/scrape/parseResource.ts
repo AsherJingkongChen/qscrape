@@ -4,6 +4,7 @@ import { prompt } from '../../prompt';
 import { JSDOM } from 'jsdom';
 import { state } from './state';
 import { getPrettyLinkName } from './getPrettyLinkName';
+import { getUnhashedLink } from './getUnhashedLink';
 import cl from 'chalk';
 import ora, { Ora, spinners } from 'ora';
 import { EOL } from 'os';
@@ -22,6 +23,7 @@ import { EOL } from 'os';
 export async function parseResource(): Promise<boolean> {
   const spinner = ora({
     color: 'yellow',
+    discardStdin: false,
     hideCursor: false,
     prefixText: prompt`Fetching ${cl.cyan(state.link)}`,
     spinner: spinners.line,
@@ -56,6 +58,7 @@ export async function parseResource(): Promise<boolean> {
   const mediaType = (response.headers.get('content-type') ?? '')
     .split(';')[0]
     ?.toLowerCase();
+  const unhashedLink = getUnhashedLink(state.link);
   switch (mediaType) {
     case 'text/html':
     case 'application/xhtml+xml':
@@ -64,8 +67,18 @@ export async function parseResource(): Promise<boolean> {
         url: response.url,
       }).window;
       state.altName = document.title;
-      state.relatedResources.push(...Resource.fromHtml(document));
       state.textContent = document.body.textContent ?? '';
+      let findLimit = 50;
+      for (const foundResource of Resource.fromHtml(document)) {
+        // Exclude found resources with the same unhashed link
+        if (getUnhashedLink(foundResource.link) !== unhashedLink) {
+          if (--findLimit <= 0) {
+            break;
+          }
+          state.relatedResources.push(foundResource);
+        }
+      }
+      document.documentElement.remove();
       break;
     case 'text/plain':
       state.altName = getPrettyLinkName(state.link);
@@ -74,7 +87,17 @@ export async function parseResource(): Promise<boolean> {
     default:
       return complain(`Unsupported media type "${mediaType}"`, { spinner });
   }
-  state.relatedResources.push(...Resource.fromText(state.textContent));
+
+  // Exclude the found resources with the same unhashed link
+  let findLimit = 50;
+  for (const foundResource of Resource.fromText(state.textContent)) {
+    if (getUnhashedLink(foundResource.link) !== unhashedLink) {
+      if (--findLimit <= 0) {
+        break;
+      }
+      state.relatedResources.push(foundResource);
+    }
+  }
 
   // Succeeds with `true`
   spinner.stopAndPersist({ symbol: '' });

@@ -19,10 +19,10 @@ export async function inquireToSave(): Promise<boolean> {
     await select(
       {
         choices: [
-          { name: 'Yes, save it.', value: true },
           { name: 'No, drop it.', value: false },
+          { name: 'Yes, save it.', value: true },
         ],
-        default: true,
+        default: false,
         message: 'Do you want to save this resource?',
       },
       context.streams,

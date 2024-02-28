@@ -6,11 +6,7 @@ import cl from 'chalk';
 describe('QScrape.prompt()', () => {
   it('It does only set raw literals to bold', () => {
     expect(QScrape.prompt`1 + 1 == ${2} is ${true}`).toBe(
-      cl.green('> ') +
-        cl.bold('1 + 1 == ') +
-        '2' +
-        cl.bold(' is ') +
-        'true'
+      cl.green('> ') + cl.bold('1 + 1 == ') + '2' + cl.bold(' is ') + 'true',
     );
   });
 });
