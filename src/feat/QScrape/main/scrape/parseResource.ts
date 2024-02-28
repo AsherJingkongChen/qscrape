@@ -1,9 +1,9 @@
 import { Resource } from '../../../../core';
-import { context } from '../../context';
+import { prompt } from '../../prompt';
 import { JSDOM } from 'jsdom';
-import { EOL } from 'os';
 import { state } from './state';
 import { getPrettyLinkName } from './getPrettyLinkName';
+import cl from 'chalk';
 
 /**
  * ## Introduction
@@ -17,7 +17,7 @@ import { getPrettyLinkName } from './getPrettyLinkName';
  * - It depends on `state`
  */
 export async function parseResource(): Promise<boolean> {
-  context.streams.output.write(`> Fetching "${state.link}" ...${EOL}`);
+  prompt`Fetching ${cl.cyan(state.link)} ...`;
 
   // Fetches the resource
   let response: Response | undefined;
@@ -72,8 +72,6 @@ export async function parseResource(): Promise<boolean> {
  *   + A failure
  */
 function complain(reason: string): false {
-  context.streams.output.write(
-    `! The resource is not available: ${reason}${EOL}`,
-  );
+  prompt`${cl.bold.yellow(`The resource is not available: ${reason}`)}`;
   return false;
 }

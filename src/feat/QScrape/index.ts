@@ -3,6 +3,7 @@ import { context } from './context';
 import { error } from './error';
 import { finish } from './finish';
 import { main } from './main';
+import { prompt } from './prompt';
 import { run } from './run';
 
 /**
@@ -92,6 +93,27 @@ export type QScrape = {
 
   /**
    * ## Introduction
+   * Prompts the user with a message
+   *
+   * ## Parameters
+   * - `template`: `{ raw: readonly string[] }`
+   *   + A raw template object
+   *   + `raw`: `string[]`
+   *     + They will be set to bold
+   * - `substitutions`: `any[]`
+   *   + Values to interpolate into the template
+   *
+   * ## Examples
+   * - The Output is **A number:** 2
+   *
+   *   ```javascript
+   *   prompt`A number: ${1 + 1}`;
+   *   ```
+   */
+  prompt(template: { raw: readonly string[] }, ...substitutions: any[]): void;
+
+  /**
+   * ## Introduction
    * Runs `QScrape` module
    *
    * ## Returns
@@ -106,5 +128,6 @@ export const QScrape: QScrape = {
   error,
   finish,
   main,
+  prompt,
   run,
 };

@@ -1,4 +1,6 @@
 import { context } from '../../context';
+import { prompt } from '../../prompt';
+import cl from 'chalk';
 import select from '@inquirer/select';
 
 /**
@@ -13,16 +15,15 @@ import select from '@inquirer/select';
  * - It depends on `context.result`
  */
 export async function inquireToContinue(): Promise<boolean> {
+  prompt`There are ${cl.cyan(context.result.length)} saved resources.`;
   return await select(
     {
       choices: [
-        { name: 'Yes', value: true },
-        { name: 'No', value: false },
+        { name: `Yes, let's continue.`, value: true },
+        { name: 'No.', value: false },
       ],
       default: true,
-      message:
-        `Total ${context.result.length} resources are saved. ` +
-        'Do you want to continue to explore?',
+      message: 'Do you want to continue to explore?',
     },
     context.streams,
   );

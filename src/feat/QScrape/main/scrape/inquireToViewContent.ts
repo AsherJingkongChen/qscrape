@@ -15,12 +15,20 @@ import { state } from './state';
  * - It depends on `state`
  */
 export async function inquireToViewContent(): Promise<boolean> {
+  const viewer = new ExternalEditor(state.textContent, {
+    mode: 0o444,
+    postfix: `.txt`,
+    prefix: 'QScrape-',
+  });
   if (
     await select(
       {
         choices: [
-          { name: 'Yes', value: true },
-          { name: 'No', value: false },
+          {
+            name: `Yes, open in ${viewer.editor.bin}.`,
+            value: true,
+          },
+          { name: 'No.', value: false },
         ],
         default: false,
         message: 'Do you want to view the content?',
@@ -29,13 +37,7 @@ export async function inquireToViewContent(): Promise<boolean> {
     )
   ) {
     // Shows the content in a read-only editor
-    const editor = new ExternalEditor(state.textContent, {
-      mode: 0o444,
-      postfix: `.txt`,
-      prefix: 'QScrape-',
-    });
-    editor.editor.bin = '/usr/bin/less';
-    editor.run();
+    viewer.run();
     return true;
   }
   return false;
