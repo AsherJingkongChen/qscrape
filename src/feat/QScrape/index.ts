@@ -106,7 +106,7 @@ export type QScrape = {
    *   + A prompt decorated with `chalk`
    *
    * ## Examples
-   * - The Output is "> **1 + 1 ==** 2 **is** true\n"
+   * - The Output is "> **1 + 1 ==** 2 **is** true"
    *
    *   ```javascript
    *   prompt`1 + 1 == ${1 + 1} is ${true}`;

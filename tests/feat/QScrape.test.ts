@@ -2,7 +2,6 @@ import { QuietError } from 'src/core';
 import { QScrape } from 'src/feat';
 import { describe, expect, it } from 'vitest';
 import cl from 'chalk';
-import { EOL } from 'os';
 
 describe('QScrape.prompt()', () => {
   it('It does only set raw literals to bold', () => {
@@ -11,8 +10,7 @@ describe('QScrape.prompt()', () => {
         cl.bold('1 + 1 == ') +
         '2' +
         cl.bold(' is ') +
-        'true' +
-        EOL,
+        'true'
     );
   });
 });

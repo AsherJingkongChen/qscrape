@@ -2,6 +2,7 @@ import { context } from '../../context';
 import { prompt } from '../../prompt';
 import cl from 'chalk';
 import select from '@inquirer/select';
+import { EOL } from 'os';
 
 /**
  * ## Introduction
@@ -16,7 +17,7 @@ import select from '@inquirer/select';
  */
 export async function inquireToContinue(): Promise<boolean> {
   context.streams.output.write(
-    prompt`There are ${cl.cyan(context.result.length)} saved resources.`,
+    prompt`There are ${cl.cyan(context.result.length)} saved resources.${EOL}`,
   );
   return await select(
     {
