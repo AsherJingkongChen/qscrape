@@ -93,24 +93,26 @@ export type QScrape = {
 
   /**
    * ## Introduction
-   * Prompts the user with a message
+   * Get a pretty prompt
    *
    * ## Parameters
-   * - `template`: `{ raw: readonly string[] }`
-   *   + A raw template object
-   *   + `raw`: `string[]`
-   *     + They will be set to bold
-   * - `substitutions`: `any[]`
+   * - `template.raw`: `readonly string[]`
+   *   + Raw literals that will be set to bold
+   * - `...substitutions`: `any[]`
    *   + Values to interpolate into the template
    *
+   * ## Returns
+   * - `string`
+   *   + A prompt decorated with `chalk`
+   *
    * ## Examples
-   * - The Output is **A number:** 2
+   * - The Output is "> **1 + 1 ==** 2 **is** true\n"
    *
    *   ```javascript
-   *   prompt`A number: ${1 + 1}`;
+   *   prompt`1 + 1 == ${1 + 1} is ${true}`;
    *   ```
    */
-  prompt(template: { raw: readonly string[] }, ...substitutions: any[]): void;
+  prompt(template: { raw: readonly string[] }, ...substitutions: any[]): string;
 
   /**
    * ## Introduction

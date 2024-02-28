@@ -12,10 +12,12 @@ import select from '@inquirer/select';
  *   + Resolves to `true` if the user wants to continue, otherwise `false`.
  *
  * ## Note
- * - It depends on `context.result`
+ * - It depends on `context`
  */
 export async function inquireToContinue(): Promise<boolean> {
-  prompt`There are ${cl.cyan(context.result.length)} saved resources.`;
+  context.streams.output.write(
+    prompt`There are ${cl.cyan(context.result.length)} saved resources.`,
+  );
   return await select(
     {
       choices: [

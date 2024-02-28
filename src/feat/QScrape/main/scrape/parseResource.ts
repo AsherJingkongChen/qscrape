@@ -1,9 +1,11 @@
 import { Resource } from '../../../../core';
+import { context } from '../../context';
 import { prompt } from '../../prompt';
 import { JSDOM } from 'jsdom';
 import { state } from './state';
 import { getPrettyLinkName } from './getPrettyLinkName';
 import cl from 'chalk';
+// import ora from 'ora';
 
 /**
  * ## Introduction
@@ -17,7 +19,13 @@ import cl from 'chalk';
  * - It depends on `state`
  */
 export async function parseResource(): Promise<boolean> {
-  prompt`Fetching ${cl.cyan(state.link)} ...`;
+  // const spinner = ora({
+  //   color: 'yellow',
+  //   hideCursor: false,
+  //   stream: context.streams.output,
+  //   prefixText: ``,
+  // }).start();
+  context.streams.output.write(prompt`Fetching ${cl.cyan(state.link)} ...`);
 
   // Fetches the resource
   let response: Response | undefined;
@@ -25,6 +33,8 @@ export async function parseResource(): Promise<boolean> {
     response = await fetch(state.link, { redirect: 'follow' });
   } catch (error) {
     return complain(error instanceof Error ? error.message : `${error}`);
+  } finally {
+    // spinner.stop();
   }
   if (!response.ok) {
     const { status, statusText } = response;
@@ -72,6 +82,8 @@ export async function parseResource(): Promise<boolean> {
  *   + A failure
  */
 function complain(reason: string): false {
-  prompt`${cl.bold.yellow(`The resource is not available: ${reason}`)}`;
+  context.streams.output.write(
+    prompt`${cl.yellow(`The resource is not available: ${reason}`)}`,
+  );
   return false;
 }

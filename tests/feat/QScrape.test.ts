@@ -1,6 +1,21 @@
 import { QuietError } from 'src/core';
 import { QScrape } from 'src/feat';
 import { describe, expect, it } from 'vitest';
+import cl from 'chalk';
+import { EOL } from 'os';
+
+describe('QScrape.prompt()', () => {
+  it('It does only set raw literals to bold', () => {
+    expect(QScrape.prompt`1 + 1 == ${2} is ${true}`).toBe(
+      cl.green('> ') +
+        cl.bold('1 + 1 == ') +
+        '2' +
+        cl.bold(' is ') +
+        'true' +
+        EOL,
+    );
+  });
+});
 
 describe('QScrape.finish()', () => {
   it('It does not throw', () => {
